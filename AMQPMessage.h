@@ -1,0 +1,59 @@
+//
+//  AMQPMessage.h
+//  Objective-C wrapper for librabbitmq-c
+//
+//  Copyright 2009 Max Wolter. All rights reserved.
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "AMQPObject.h"
+
+@class AMQPConsumer;
+@interface AMQPMessage : NSObject
+
+@property (readonly) NSString *body;
+@property (readonly) NSData *data;
+
+@property (readonly) NSString *contentType;
+@property (readonly) NSString *contentEncoding;
+@property (readonly) amqp_table_t headers;
+@property (readonly) uint8_t deliveryMode;
+@property (readonly) uint8_t priority;
+@property (readonly) NSString *correlationID;
+@property (readonly) NSString *replyToQueueName;
+@property (readonly) NSString *expiration;
+@property (readonly) NSString *messageID;
+@property (readonly) uint64_t timestamp;
+@property (readonly) NSString *type;
+@property (readonly) NSString *userID;
+@property (readonly) NSString *appID;
+@property (readonly) NSString *clusterID;
+
+@property (readonly) NSString *consumerTag;
+@property (readonly) uint64_t deliveryTag;
+@property (readonly) amqp_boolean_t redelivered;
+@property (readonly) NSString *exchangeName;
+@property (readonly) NSString *routingKey;
+
+@property BOOL read;
+@property (readonly) NSDate *receivedAt;
+
++ (AMQPMessage *)messageFromBody:(amqp_bytes_t)theBody withDeliveryProperties:(amqp_basic_deliver_t *)theDeliveryProperties withMessageProperties:(amqp_basic_properties_t *)theMessageProperties receivedAt:(NSDate *)receiveTimestamp;
+
+- (id)initWithBody:(amqp_bytes_t)theBody withDeliveryProperties:(amqp_basic_deliver_t *)theDeliveryProperties withMessageProperties:(amqp_basic_properties_t *)theMessageProperties receivedAt:(NSDate *)receiveTimestamp;
+- (id)initWithAMQPMessage:(AMQPMessage *)theMessage;
+
+@end

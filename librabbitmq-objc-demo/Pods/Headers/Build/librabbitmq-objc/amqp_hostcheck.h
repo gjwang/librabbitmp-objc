@@ -1,0 +1,1 @@
+../../../../../rabbitmq-c/amqp_hostcheck.h

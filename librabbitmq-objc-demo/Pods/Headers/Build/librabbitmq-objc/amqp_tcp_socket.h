@@ -1,0 +1,1 @@
+../../../../../rabbitmq-c/amqp_tcp_socket.h
